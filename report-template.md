@@ -1,16 +1,20 @@
 # Report: Predict Bike Sharing Demand with AutoGluon Solution
-#### NAME HERE
+Akíntúndé `theyorubayesian` Ọládípọ̀
 
 ## Initial Training
 ### What did you realize when you tried to submit your predictions? What changes were needed to the output of the predictor to submit your results?
-TODO: Add your explanation
+Some of the predictions were negative resulting in an error when they were submitted for evaluation. It was necessary to clip them to 0 as follows:
+```python
+predictions.loc[predictions < 0] = 0
+```
 
 ### What was the top ranked model that performed?
 TODO: Add your explanation
 
 ## Exploratory data analysis and feature creation
 ### What did the exploratory analysis find and how did you add additional features?
-TODO: Add your explanation
+The distribution for `windspeed` close to Poisson. `Temperature` and `Humidity` however had normal distributions.
+Most of the data was from working days. Three additional features were added: `hour`, `day`, and `month` created from the `datetime` column.
 
 ### How much better did your model preform after adding additional features and why do you think that is?
 TODO: Add your explanation
@@ -31,13 +35,9 @@ TODO: Add your explanation
 
 ### Create a line plot showing the top model score for the three (or more) training runs during the project.
 
-TODO: Replace the image below with your own.
-
 ![model_train_score.png](img/model_train_score.png)
 
 ### Create a line plot showing the top kaggle score for the three (or more) prediction submissions during the project.
-
-TODO: Replace the image below with your own.
 
 ![model_test_score.png](img/model_test_score.png)
 
